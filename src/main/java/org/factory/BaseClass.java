@@ -7,13 +7,13 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
 import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
 import org.json.simple.JSONObject;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import org.utils.generic.GenericLib;
+import org.utils.Assertion_Lib;
+import org.utils.GenericLib;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -37,20 +37,28 @@ public class BaseClass implements Constants {
     public static boolean traceView = false;
     public static boolean screenshotFail = true;
     public static boolean screenshotPass = false;
+    public static boolean stopOnFail = false;
     public static ExtentReports extent;
     public static ExtentSparkReporter reporter;
     public static int retryCount = 0;
 
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void beforeSuite(){
+        System.out.println("In Before suite");
         property = GenericLib.configReader("config/config.properties");
         inputData = readInputJson();
+        System.out.println("read input dtaa");
         setConfigParams();
         clearData();
         reportInitialize();
     }
 
+    @AfterSuite(alwaysRun = true)
+    public void afterSuite(){
+        extent.flush();
+        // close any db connection or any other connects if any, send any reports etc to slack or etc
+    }
 
     public void setConfigParams(){
         browserType = System.getProperty("browser", property.getProperty("browser"));
@@ -59,12 +67,12 @@ public class BaseClass implements Constants {
         traceView = System.getProperty("traceViewer", property.getProperty("traceViewer")).toLowerCase().equals("true") ? true : false;
         screenshotPass  = System.getProperty("screenshotonPass", property.getProperty("screenshotonPass")).toLowerCase().equals("true") ? true : false;
         screenshotFail = System.getProperty("screenshotonFail", property.getProperty("screenshotonFail")).toLowerCase().equals("true") ? true : false;
-        retryCount = Integer.parseInt(System.getProperty("retryCount", property.getProperty("retryCount")));
+        stopOnFail  = System.getProperty("stopOnFail", property.getProperty("stopOnFail")).toLowerCase().equals("true") ? true : false;
 
     }
 
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void beforeMethod(Method method){
         System.out.println(method.getName());
         testList.set(extent.createTest(method.getName())
@@ -96,7 +104,7 @@ public class BaseClass implements Constants {
 
         return contextOption;
     }
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod(Method method, ITestResult result){
         if(videoRec)
             System.out.println(method.getName() + "  " + pageList.get().video().path().toString());
@@ -173,7 +181,7 @@ public class BaseClass implements Constants {
     public void captureScreensho_step() {
         String screenshotPath = "screenshot_" + System.currentTimeMillis() + ".png";
         pageList.get().screenshot(new Page.ScreenshotOptions().setPath(Paths.get(reports + "/" + screenshotPath)));
-        testList.get().fail("Title verification passed", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+        testList.get().fail("Some Failure is there, check previous logs", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
     }
 
     public void reportInitialize(){
@@ -205,6 +213,10 @@ public class BaseClass implements Constants {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
+    }
+    public void assertEquals(Object expected, Object actual, String message){
+        Assertion_Lib.getInstance().assertEqual(pageList.get(), testList.get(),
+                 expected,  actual, message,
+                 screenshotPass,  screenshotFail,  stopOnFail);
     }
 }

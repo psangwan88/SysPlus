@@ -17,7 +17,7 @@ import java.util.List;
 public class LocateCenterTests extends BaseClass {
     public HomePage homePage;
     public CenterLocatorPage clPage;
-    @Test
+    @Test(groups ={"regression","locator"})
     public void locateCenter(){
         // Get test data respective to test
         JSONObject data = (JSONObject) inputData.get("locateCenterTest");

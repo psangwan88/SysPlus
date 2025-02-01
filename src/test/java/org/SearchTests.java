@@ -16,11 +16,11 @@ import java.util.List;
 public class SearchTests extends BaseClass {
 
     HomePage homePage;
-    @Test
+    @Test(groups ={"regression","search"})
     public void searchContent(){
         // Get test data respective to test
         JSONObject data = (JSONObject) inputData.get("searchContentTest");
-        String content = (String)data.get("searchContent");
+        String content = (String)data.get("searchContent") + "dfdsfs";
         // Loggin for test
         ExtentTest node = testList.get().createNode("TestSteps");
         node.log(Status.INFO, "Steps : 1. Click on search Icon. 2. Enter search string. 3. Validate if first search result exactly mataches searchedstring or not");

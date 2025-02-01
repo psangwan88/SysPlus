@@ -1,4 +1,4 @@
-package org.utils.generic;
+package org.utils;
 
 import org.json.simple.*;
 import org.json.simple.parser.*;

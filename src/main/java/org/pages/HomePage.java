@@ -23,33 +23,39 @@ public class HomePage extends BaseClass {
     }
 
     public void searchContent(String content){
+        logInfo("searchig for " + content);
         clickSearchIcon();
         enterSearchText(content);
         clickSearchButton();
     }
     public void clickSearchIcon(){
+        logInfo("click on search icon");
         page.locator(xpath_searchIcon).click();
     }
     public void enterSearchText(String content){
+        logInfo("enter text in search field");
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(text_Search)).click();
         Locator locator = page.locator(id_searchField);
         locator.last().fill(content);
     }
     public void clickSearchButton(){
+        logInfo("click on search button");
         page.locator(xpath_SearchButton).click();
     }
     public void clickLocateCenter(){
+        logInfo("click on locate center");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName(text_findCenter)).nth(1).click();
     }
 
     public void validatedSearchedFirstItem(String expected){
+        logInfo("validating if first item in searched list matches " + expected);
         List<String> list = getSearchedResultsHeadings();
         String allResults = "";
         for (String text : list) {
             allResults += text + ",";
         }
         String actualFirst = list.get(0);
-        Assert.assertEquals(actualFirst, expected, "Validating first searched result, all results " + allResults);
+        assertEquals(actualFirst, expected, "Validating first searched result");
     }
 
     public List<String> getSearchedResultsHeadings(){

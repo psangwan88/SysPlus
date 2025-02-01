@@ -18,13 +18,14 @@ public class CenterLocatorPage extends BaseClass {
     }
 
     public void searchCenter(String center){
+        logInfo("searching for center "+ center);
         page.getByPlaceholder(text_CenterPlaceHolder).click();
         page.getByPlaceholder(text_CenterPlaceHolder).fill(center);
         page.getByPlaceholder(text_CenterPlaceHolder).press("Enter");
     }
 
     public int getResultCount(){
-
+        logInfo("getting result count");
         return Integer.parseInt(page.locator(xpath_resultcount).textContent());
     }
 
@@ -37,9 +38,11 @@ public class CenterLocatorPage extends BaseClass {
     }
 
     public void verifySearchResultCounts(){
-        Assert.assertEquals(getResultCount(),getCenterCardsCount(), "Result count vs Result Cards");
+        logInfo("validating result count vs cards shown");
+        assertEquals(getResultCount(),getCenterCardsCount(), "Result count vs Result Cards");
     }
     public void validateUrl(String expected){
-        Assert.assertEquals(page.url(),expected, "Validating URL");
+        logInfo("validating url of new page");
+        assertEquals(page.url(),expected, "Validating URL");
     }
 }

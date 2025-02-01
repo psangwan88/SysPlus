@@ -2,6 +2,7 @@ package org.factory;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
@@ -19,4 +20,8 @@ public interface Constants {
     ThreadLocal<BrowserContext> browserContextList = new ThreadLocal<>();
     ThreadLocal<Page> pageList = new ThreadLocal<>();
     ThreadLocal<ExtentTest> testList = new ThreadLocal<>();
+
+    default void logInfo(String message){
+        testList.get().log(Status.INFO,message);
+    }
 }
