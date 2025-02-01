@@ -10,24 +10,26 @@ import java.util.List;
 
 public class CenterLocatorPage extends BaseClass {
     Page page;
-    String xpath_home = "//a[@title='home']";
+    String text_CenterPlaceHolder = "Address, City, State or Zip";
+    String xpath_resultcount = "//span[@class='resultsNumber']";
+    String xpath_resultWebCard = "//div[contains(@class,'centerResult infoWindow')]";
     public CenterLocatorPage(Page page){
         this.page = page;
     }
 
     public void searchCenter(String center){
-        page.getByPlaceholder("Address, City, State or Zip").click();
-        page.getByPlaceholder("Address, City, State or Zip").fill(center);
-        page.getByPlaceholder("Address, City, State or Zip").press("Enter");
+        page.getByPlaceholder(text_CenterPlaceHolder).click();
+        page.getByPlaceholder(text_CenterPlaceHolder).fill(center);
+        page.getByPlaceholder(text_CenterPlaceHolder).press("Enter");
     }
 
     public int getResultCount(){
 
-        return Integer.parseInt(page.locator("//span[@class='resultsNumber']").textContent());
+        return Integer.parseInt(page.locator(xpath_resultcount).textContent());
     }
 
     public int getCenterCardsCount(){
-        return page.locator("//div[contains(@class,'centerResult infoWindow')]").count();
+        return page.locator(xpath_resultWebCard).count();
     }
 
     public void selectDistance(){
