@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -69,5 +70,31 @@ public class TestStatic {
         int results = Integer.parseInt(page.locator("//span[@class='resultsNumber']").textContent());
         int resultCounts = page.locator("//div[contains(@class,'centerResult infoWindow')]").count();
         Assert.assertEquals(results,resultCounts, "Result count vs Result Cards");
+    }
+
+
+    public static void main(String[] args) {
+        clearData();
+
+    }
+
+    public static void clearData(){
+            clearDownloadVideos(new File("reports"));
+            File folder = new File("reports");
+            folder.mkdir();
+    }
+    public static boolean clearDownloadVideos(File folder){
+        try {
+            if (folder.isDirectory()) {
+                for (File file : folder.listFiles()) {
+                    clearDownloadVideos(file); // Recursive call for subdirectories and files
+                }
+            }
+            return folder.delete(); // Delete the folder or file
+        }
+        catch(Exception e){
+            System.out.println(e.fillInStackTrace());
+        }
+        return true;
     }
 }
