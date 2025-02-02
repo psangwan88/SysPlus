@@ -50,17 +50,17 @@ System plus project
 **CI/CD **
 
   **Self Repo** : in this repo, on commit to master or on pull request to master, it will run test suite via testng file testNGFiles/tests.xml,  for longer suite we should run only sanity not full suite.
+                  artifacts can also be downloaded in case of failures
   **Dev Repo** :  with dev repo this should be integrated with jenkins pipeline of dev Repository, where we can add it as a part of jenkins pipeline as a build step, where test cases will be run via docker image for this repo
 
 How to use trave viewer logs  
 
-Running in parallel
+**Running in parallel**  : currently supported via testNG runner, for distributed systems or cloud farms we need to use selenium grid.
 
-Running on different browsers
+**Running on different browsers**  : current implementation provides facility to run on different browsers by updating in config.properties file, need to add parameter for testng files like running one class on one browser
 
-Running on different browsers without changing config file, via command line
+**Running on different browsers without changing config file, via command line**  : yet to be done
 
-Running same Test class on different browsers : 
 
 
   
