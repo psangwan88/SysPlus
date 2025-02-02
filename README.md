@@ -50,7 +50,8 @@ System plus project
 **CI/CD**
 
   **Self Repo** : in this repo, on commit to master or on pull request to master, it will run test suite via testng file testNGFiles/tests.xml,  for longer suite we should run only sanity not full suite.
-                  artifacts can also be downloaded in case of failures
+                  artifacts can also be downloaded in case of failures.
+                  Example of artifact https://github.com/psangwan88/SysPlus/actions/runs/13096695312
 
   **Dev Repo** :  with dev repo this should be integrated with jenkins pipeline of dev Repository, where we can add it as a part of jenkins pipeline as a build step, where test cases will be run via docker image for this repo
 
