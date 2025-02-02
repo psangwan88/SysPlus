@@ -17,32 +17,34 @@ System plus projet
 
 
 **Features :**
-  Page Object Model : page data/locators/methods are taken from respective page classes, which create a layer of abstraction, also decreases maintainence in case if there are any changes
 
-  Parallel Execution : Parallel execution is done using testNG here. For distributed testing we can use selenium Grid also but need separate configuration for that which is not implemented yet
+  **Page Object Model** : page data/locators/methods are taken from respective page classes, which create a layer of abstraction, also decreases maintainence in case if there are any changes
 
-  Data Driver : test data is not hardcoded with test cases, but taken from external source here which is json file. We can use another external source, xml file or google sheets, all we have to do is update in generic lib to return test data in jsonobject form only.
+  **Parallel Execution** : Parallel execution is done using testNG here. For distributed testing we can use selenium Grid also but need separate configuration for that which is not implemented yet
 
-  Scalable : we can add number of tests without interupting much and add multiple pages and tests. We have facility to run tests in parallel as well to finish execution as fast as possible. 
+  **Data Driven** : test data is not hardcoded with test cases, but taken from external source here which is json file. We can use another external source, xml file or google sheets, all we have to do is update in generic lib to return test data in jsonobject form only.
 
-  Maintainable : less maintenance due to multilayers and resuable code.
+  **Scalable** : we can add number of tests without interupting much and add multiple pages and tests. We have facility to run tests in parallel as well to finish execution as fast as possible. 
+
+  **Maintainable** : less maintenance due to multilayers and resuable code.
 
 
   **Note** : Parallel execution for very large products say ( 1000s test cases we need distributed system which can be achieved with Selenium grid rather than testNG but will take some time for implementations) 
 
 
 **Important Directories :**
-  src : main contains main code for libraries/utilities and page objects
 
-  testNGFiles : testng files to run full suite/respective classes or tests. 
+  **src** : main contains main code for libraries/utilities and page objects
 
-  TestData : test data for test cases, used json file here, we can use other type of external data sources as well like google sheets etc
+  **testNGFiles** : testng files to run full suite/respective classes or tests. 
 
-  reports : this will be generated at run time, containing reports, extent report, screenshots, video recordings, trace views 
+  **TestData** : test data for test cases, used json file here, we can use other type of external data sources as well like google sheets etc
 
-  config : config file where we can provide configurations like browser to use, screenshot configs when to take, video recording or not etc
+  **reports** : this will be generated at run time, containing reports, extent report, screenshots, video recordings, trace views 
 
-  Note : a lot of config is taken to Constants interface in package "org.factory", these are the configs which we dont change very frequently
+  **config** : config file where we can provide configurations like browser to use, screenshot configs when to take, video recording or not etc
+
+  **Note** : a lot of config is taken to Constants interface in package "org.factory", these are the configs which we dont change very frequently
 
 
 How to use trave viewer logs  
