@@ -15,6 +15,19 @@ System plus project
 
   Framework : Hybrid ( Based on Page Object Model/ POM)
 
+**How to execute** 
+  use any of below commands, we have arguments which are optional to update config properties, either update config.properties or we can pass as arguments also
+
+  **mvn test -DsuiteXmlFile=testNGFiles/tests.xml**
+          :  run testng file tests.xml which contains all test files as of now
+
+  **mvn test -DsuiteXmlFile=testNGFiles/tests_parallel.xml**
+          :  run testng file tests_parallel.xml which contains all test files and running them in parallel
+          
+  **mvn test -DsuiteXmlFile=testNGFiles/tests.xml -Dheadless=false -DvideoRecording=true -DscreenshotonPass=false -Dbrowser=firefox**
+          : properties updates like headless or not,  videorecording or not, screenshotonpassed steps or not, browser like chrome/firefox etc
+
+  
 
 **Features :**
 
