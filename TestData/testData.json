@@ -5,6 +5,6 @@
 
   "locateCenterTest": {
     "center": "New York",
-    "url": "https://www.brighthorizons.com/child-care-locator"
+    "url": "/child-care-locator"
   }
 }
