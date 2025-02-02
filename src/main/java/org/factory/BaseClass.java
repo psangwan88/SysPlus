@@ -7,6 +7,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.ViewName;
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Tracing;
 import org.json.simple.JSONObject;
@@ -91,7 +92,9 @@ public class BaseClass implements Constants {
         pageList.set(browserContextList.get().newPage());
         pageList.get().navigate(baseUrl);
         //can be removed from here if we want to accept cookies later
-        pageList.get().locator("text=Reject All").last().click();
+        Locator rejectAll = pageList.get().locator("text=Reject All");
+        if (rejectAll.count() > 0) 
+            rejectAll.last().click();
 
     }
 
