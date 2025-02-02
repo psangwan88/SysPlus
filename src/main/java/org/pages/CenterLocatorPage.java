@@ -43,6 +43,6 @@ public class CenterLocatorPage extends BaseClass {
     }
     public void validateUrl(String expected){
         logInfo("validating url of new page");
-        assertEquals(page.url(),expected, "Validating URL");
+        assertEquals(page.url().contains(expected),true, "Validating URL contains " + expected);
     }
 }

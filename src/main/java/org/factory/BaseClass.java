@@ -13,6 +13,7 @@ import com.microsoft.playwright.Tracing;
 import org.json.simple.JSONObject;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+import org.testng.annotations.Optional;
 import org.utils.Assertion_Lib;
 import org.utils.GenericLib;
 
@@ -21,9 +22,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 public class BaseClass implements Constants {
 
@@ -33,6 +32,7 @@ public class BaseClass implements Constants {
     public static String[] folders = new String[] {videopath1,videopath2,traceViewPath};
     public static Properties property;
     public static String browserType;
+    public static String execution;
     public static boolean headless = true;
     public static boolean videoRec = false;
     public static boolean traceView = false;
@@ -63,6 +63,7 @@ public class BaseClass implements Constants {
 
     public void setConfigParams(){
         browserType = System.getProperty("browser", property.getProperty("browser"));
+        execution = System.getProperty("execution", property.getProperty("execution"));
         headless = System.getProperty("headless", property.getProperty("headless")).toLowerCase().equals("true") ? true : false;
         videoRec = System.getProperty("videoRecording", property.getProperty("videoRecording")).toLowerCase().equals("true") ? true : false;
         traceView = System.getProperty("traceViewer", property.getProperty("traceViewer")).toLowerCase().equals("true") ? true : false;
@@ -72,15 +73,23 @@ public class BaseClass implements Constants {
 
     }
 
-
+    @Parameters({"browserName"})
     @BeforeMethod(alwaysRun = true)
-    public void beforeMethod(Method method){
+    public void beforeMethod(@Optional String browserName, Method method){
+        String browser = browserType;
+        if(browserName != null)
+            browser = browserName;
         System.out.println(method.getName());
         testList.set(extent.createTest(method.getName())
                 .log(Status.INFO, "This is a logging event for test name " + method.getName()));
-
+        testList.get().log(Status.INFO, "Launching Browser "+ browser);
         DriverFactory factory = new DriverFactory();
-        browserList.set(factory.initBrowser(browserType, headless));
+        // here check if execution is local or not
+        if(execution.toLowerCase().equals("local"))
+            browserList.set(factory.initBrowser(browser, headless));
+        else
+            browserList.set(factory.initBrowser_cloud(getLambdaTestCapabilities(browser), headless));
+
         browserContextList.set(browserList.get().newContext(getBrowserContextOptions()));
         browserContextList.get().setDefaultTimeout(wait);
         if(traceView)
@@ -224,5 +233,15 @@ public class BaseClass implements Constants {
         Assertion_Lib.getInstance().assertEqual(pageList.get(), testList.get(),
                  expected,  actual, message,
                  screenshotPass,  screenshotFail,  stopOnFail);
+    }
+
+    public Map<String,String> getLambdaTestCapabilities(String browserType){
+        Map<String,String> map = new HashMap<>();
+        map.put("lambdatest_username", property.getProperty("lambdatest_username"));
+        map.put("lambdatest_accessKey", property.getProperty("lambdatest_accessKey"));
+        map.put("browserName", browserType);
+        map.put("platform", property.getProperty("platform"));
+        map.put("lambdatest_username", property.getProperty("lambdatest_username"));
+        return map;
     }
 }

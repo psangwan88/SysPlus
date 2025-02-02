@@ -5,10 +5,22 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Playwright;
 
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
     static Playwright playwright = null;
 
+    public Browser initBrowser_cloud(Map<String,String> map, boolean headless){
+
+        playwright = Playwright.create();        Browser browser;
+        BrowserType.LaunchOptions launchOption = new BrowserType.LaunchOptions();
+        launchOption.setHeadless(headless);
+
+        // LambdaTest/Browserstack etc Capabilities
+
+        return null;
+    }
     public Browser initBrowser(String browserType, boolean headless){
         if(playwright != null)
             playwright = Playwright.create();

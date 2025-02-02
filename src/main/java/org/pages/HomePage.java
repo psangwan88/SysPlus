@@ -25,6 +25,7 @@ public class HomePage extends BaseClass {
     public void searchContent(String content){
         logInfo("searchig for " + content);
         clickSearchIcon();
+        validateSearchField();
         enterSearchText(content);
         clickSearchButton();
     }
@@ -37,6 +38,9 @@ public class HomePage extends BaseClass {
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(text_Search)).click();
         Locator locator = page.locator(id_searchField);
         locator.last().fill(content);
+    }
+    public void validateSearchField(){
+        assertEquals(page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName(text_Search)).isVisible(), true, "Validating search field is present");
     }
     public void clickSearchButton(){
         logInfo("click on search button");
