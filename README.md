@@ -15,6 +15,8 @@ System plus project
 
   Framework : Hybrid ( Based on Page Object Model/ POM)
 
+  Execution : Local only, though if we want to execute on cloud platforms then we need to update in driver factory only and credentials can be taken from config.properties
+
 **How to execute** 
   use any of below commands, we have arguments which are optional to update config properties, either update config.properties or we can pass as arguments also
 
