@@ -4,11 +4,17 @@ System plus projet
 
 **Tech Stack : **
   Automation : Playwright library
+
   Coding language : Java
+
   Reporting : Extent Reports
+
   Build tool : Maven
+
   Test Runner : TestNg/Maven Surefire Plugin
+
   Framework : Hybrid ( Based on Page Object Model/ POM)
+
 
 **Features :**
   Page Object Model : page data/locators/methods are taken from respective page classes, which create a layer of abstraction, also decreases maintainence in case if there are any changes
