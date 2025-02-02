@@ -1,5 +1,5 @@
 # SysPlus
-System plus projet
+System plus project
 
 
 **Tech Stack : **
