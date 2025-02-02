@@ -47,7 +47,7 @@ public class BaseClass implements Constants {
     public void beforeSuite(){
         System.out.println("In Before suite");
         property = GenericLib.configReader("config/config.properties");
-        inputData = readInputJson();
+        inputData = readTestData();
         System.out.println("read input dtaa");
         setConfigParams();
         clearData();
@@ -137,8 +137,11 @@ public class BaseClass implements Constants {
             System.out.println(e.fillInStackTrace());
         }
     }
-    public JSONObject readInputJson(){
-        return GenericLib.readJson(dataFile);
+    public JSONObject readTestData(){
+        String dataPath = dataFile;
+        if(property.getProperty("dataFile") != null)
+            dataPath = property.getProperty("dataFile");
+        return GenericLib.getTestData(dataFile);
     }
     public boolean clearDownloadVideos(File folder){
         try {
