@@ -93,7 +93,7 @@ public class BaseClass implements Constants {
         pageList.get().navigate(baseUrl);
         //can be removed from here if we want to accept cookies later
         Locator rejectAll = pageList.get().locator("text=Reject All");
-        if (rejectAll.count() > 0) 
+        if (rejectAll.count() > 0)
             rejectAll.last().click();
 
     }
