@@ -76,7 +76,13 @@ How to use trave viewer logs
 
 **Running on different browsers**  : current implementation provides facility to run on different browsers by updating in config.properties file, need to add parameter for testng files like running one class on one browser
 
-**Running on different browsers without changing config file, via command line**  : yet to be done
+
+**Future Steps that can be taken as part of Large Project** 
+  1. Creation of Docker image on every push/merge to main : - to be used anywhere.
+  2. Integration in Dev repo, such that for any change we can run suite using Docker image
+  3. Jenkins job/pipeline creation and execution of tests on local system
+  4. As part  of jenkins job/pipeline execute test cases from local to Cloud platform
+  5. As part of jenkins job/pipeline execute test cases on AWS using distributed system/Selenium Grid for faster execution and getting results in minutes
 
 
 
