@@ -1,8 +1,8 @@
 # SysPlus
 System plus project
 
+**Tech Stack**
 
-**Tech Stack : **
   Automation : Playwright library
 
   Coding language : Java
