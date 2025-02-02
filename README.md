@@ -47,10 +47,11 @@ System plus project
   **Note** : a lot of config is taken to Constants interface in package "org.factory", these are the configs which we dont change very frequently
 
 
-**CI/CD **
+**CI/CD**
 
   **Self Repo** : in this repo, on commit to master or on pull request to master, it will run test suite via testng file testNGFiles/tests.xml,  for longer suite we should run only sanity not full suite.
                   artifacts can also be downloaded in case of failures
+
   **Dev Repo** :  with dev repo this should be integrated with jenkins pipeline of dev Repository, where we can add it as a part of jenkins pipeline as a build step, where test cases will be run via docker image for this repo
 
 How to use trave viewer logs  
