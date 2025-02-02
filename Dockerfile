@@ -36,6 +36,5 @@ COPY config ./config
 
 # Step 9: Install Playwright browsers (optional but recommended)
 RUN playwright install --with-deps
-
 # Step 10: Run Maven tests
 CMD ["mvn", "clean", "test", "-DsuiteXmlFile=testNGFiles/tests.xml"]
